@@ -2,6 +2,9 @@
 
 Este projeto consiste em um **mosaico de imagens interativo**, com um efeito de carrossel de três linhas, onde as imagens distorcidas nas bordas criam a ilusão de estarem sobre uma esfera. As imagens ficam em preto e branco até serem selecionadas, quando ganham cor e um leve efeito de zoom. O carrossel permite que as imagens se movam como um todo, proporcionando uma experiência fluida de navegação.
 
+## Teste através do link
+Link: https://harrisalexandre.github.io/mosaico-de-imagens
+
 ## Tecnologias Utilizadas
 
 - **HTML5**: Para a estrutura do conteúdo.
