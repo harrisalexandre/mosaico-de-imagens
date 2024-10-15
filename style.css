@@ -1,46 +1,89 @@
-const carousel = document.getElementById("carousel");
-let isMouseDown = false;
-let startX, scrollLeft, startY, scrollTop;
-const images = document.querySelectorAll(".carousel-row img");
-
-// Função para revelar as imagens da quarta coluna
-function revealImages() {
-    const hiddenImages = document.querySelectorAll(".carousel-row img:nth-child(4), .carousel-row img:nth-child(8), .carousel-row img:nth-child(12)");
-    hiddenImages.forEach(img => {
-        img.style.display = "block";  // Exibe as imagens ocultas
-    });
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-// Inicia o arraste do carrossel
-carousel.addEventListener("mousedown", (e) => {
-    isMouseDown = true;
-    startX = e.pageX - carousel.offsetLeft;
-    startY = e.pageY - carousel.offsetTop;
-    scrollLeft = carousel.scrollLeft;
-    scrollTop = carousel.scrollTop;
-    carousel.style.cursor = "grabbing";
-    revealImages(); // Revela as imagens ocultas ao clicar ou arrastar
-});
+body {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
 
-// Para o arraste do carrossel
-carousel.addEventListener("mouseup", () => {
-    isMouseDown = false;
-    carousel.style.cursor = "grab";
-});
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    width: 80vw;
+    height: 80vh;
+    position: relative;
+    overflow: hidden;
+}
 
-// Durante o arraste
-carousel.addEventListener("mousemove", (e) => {
-    if (!isMouseDown) return;
-    e.preventDefault();
-    const x = e.pageX - carousel.offsetLeft;
-    const y = e.pageY - carousel.offsetTop;
-    const walkX = (x - startX) * 2;
-    const walkY = (y - startY) * 2;
-    carousel.scrollLeft = scrollLeft - walkX;
-    carousel.scrollTop = scrollTop - walkY;
-});
+.image-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.5s ease;
+}
 
-// Revela a quarta coluna (imagens ocultas) ao passar o mouse por cima
-carousel.addEventListener("mouseenter", () => {
-    revealImages();
-});
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) blur(5px); /* Aplica blur padrão a todas as imagens */
+    transition: filter 0.5s ease;
+}
+
+.image-container:hover img {
+    filter: grayscale(0%) blur(0); /* Remove o blur ao passar o mouse */
+}
+
+.image-title {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: white;
+    font-size: 18px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 5px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-container:hover .image-title {
+    opacity: 1;
+}
+
+/* Remove o blur nas imagens centrais */
+.center-image img {
+    filter: grayscale(0%) blur(0);
+}
+
+/* Aplica o blur conforme a distância da imagem central */
+.image-container:nth-child(1),
+.image-container:nth-child(3),
+.image-container:nth-child(7),
+.image-container:nth-child(9) {
+    filter: grayscale(50%) blur(2px); /* 1ª, 3ª, 7ª, 9ª imagem tem blur mais forte */
+}
+
+.image-container:nth-child(2),
+.image-container:nth-child(4),
+.image-container:nth-child(6),
+.image-container:nth-child(8) {
+    filter: grayscale(50%) blur(0.5px); /* 2ª, 4ª, 6ª, 8ª imagem tem blur médio */
+}
+
+/* A imagem central (5) fica sem blur */
+.image-container:nth-child(5) {
+    filter: grayscale(0%) blur(0);
+}
