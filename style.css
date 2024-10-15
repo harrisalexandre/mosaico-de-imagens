@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.mosaic {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 90vw;
+    height: 70vh;
+    cursor: grab;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Efeito de preto e branco, e zoom nas imagens */
+.mosaic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) blur(1px); /* Preto e branco com blur */
+    transition: filter 0.3s ease, transform 0.3s ease;
+    width: calc(25% - 10px);
+}
+
+/* Ao passar o mouse: zoom e a imagem aparece colorida */
+.mosaic img:hover {
+    filter: grayscale(0%) blur(0); /* Ao passar o mouse, a imagem ganha cor */
+    transform: scale(1.1); /* Efeito de zoom */
+}
+
+/* Imagens com distorção progressiva conforme a posição */
+.carousel-row img:nth-child(1) {
+    transform: perspective(500px) rotateY(-10deg) translateX(3px) translateY(-5px); /* Mais distorcida à esquerda e acima */
+    filter: grayscale(100%) blur(2px);
+}
+
+.carousel-row img:nth-child(2) {
+    transform: perspective(500px) rotateY(-5deg) translateX(2px); /* Ligeiramente distorcida */
+    filter: grayscale(100%) blur(1.5px);
+}
+
+.carousel-row img:nth-child(3) {
+    transform: perspective(500px) rotateY(0deg); /* Sem distorção */
+    filter: grayscale(100%) blur(1px);
+}
+
+.carousel-row img:nth-child(4) {
+    transform: perspective(500px) rotateY(5deg) translateX(-2px); /* Ligeiramente distorcida */
+    filter: grayscale(100%) blur(1.5px);
+}
+
+.carousel-row img:nth-child(5) {
+    transform: perspective(500px) rotateY(10deg) translateX(-3px) translateY(5px); /* Mais distorcida à direita e abaixo */
+    filter: grayscale(100%) blur(2px);
+}
+
+/* Segunda linha de imagens */
+.carousel-row:nth-of-type(2) img:nth-child(1) {
+    transform: perspective(500px) rotateY(-10deg) translateX(3px); /* Mais distorcida à esquerda */
+    filter: grayscale(100%) blur(2px);
+}
+
+.carousel-row:nth-of-type(2) img:nth-child(2) {
+    transform: perspective(500px) rotateY(-5deg); /* Ligeiramente distorcida */
+    filter: grayscale(100%) blur(1.5px);
+}
+
+.carousel-row:nth-of-type(2) img:nth-child(3) {
+    transform: perspective(500px) rotateY(0deg); /* Sem distorção */
+    filter: grayscale(100%) blur(1px);
+}
+
+.carousel-row:nth-of-type(2) img:nth-child(4) {
+    transform: perspective(500px) rotateY(5deg) translateX(-3px); /* Ligeiramente distorcida */
+    filter: grayscale(100%) blur(1.5px);
+}
+
+.carousel-row:nth-of-type(2) img:nth-child(5) {
+    transform: perspective(500px) rotateY(10deg) translateX(-2px); /* Mais distorcida à direita */
+    filter: grayscale(100%) blur(2px);
+}
+
+/* Última linha de imagens */
+.carousel-row:nth-of-type(3) img:nth-child(1) {
+    transform: perspective(500px) rotateY(-10deg) translateX(3px); /* Mais distorcida à esquerda */
+    filter: grayscale(100%) blur(2px);
+}
+
+.carousel-row:nth-of-type(3) img:nth-child(2) {
+    transform: perspective(500px) rotateY(-5deg); /* Ligeiramente distorcida */
+    filter: grayscale(100%) blur(1.5px);
+}
+
+.carousel-row:nth-of-type(3) img:nth-child(3) {
+    transform: perspective(500px) rotateY(0deg); /* Sem distorção */
+    filter: grayscale(100%) blur(1px);
+}
+
+.carousel-row:nth-of-type(3) img:nth-child(4) {
+    transform: perspective(500px) rotateY(5deg) translateX(-2px); /* Ligeiramente distorcida */
+    filter: grayscale(100%) blur(1.5px);
+}
+
+.carousel-row:nth-of-type(3) img:nth-child(5) {
+    transform: perspective(500px) rotateY(10deg) translateX(-3px); /* Mais distorcida à direita */
+    filter: grayscale(100%) blur(2px);
+}
+
+/* Imagem selecionada */
+.mosaic img.selected {
+    filter: grayscale(0%) blur(0); /* Ao clicar na imagem, ela ganha cor */
+    transform: scale(1.2); /* Aumenta o zoom na imagem */
+}
+
+/* Fade no fundo */
+.mosaic img:not(.selected) {
+    filter: grayscale(100%) blur(1.5px);
+}
